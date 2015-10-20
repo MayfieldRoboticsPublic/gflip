@@ -35,6 +35,7 @@
 #include <vocabulary/Vocabulary.h>
 
 #include <gflip/gflip_engine.hpp>
+#include <gflip/gflip_types.hpp>
 
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
@@ -251,11 +252,6 @@ void describeLog(){
     m_sensorReference.seek(position);
     std::cout << " done." << std::endl;
 }
-
-struct WordResult {
-  unsigned int word;
-  OrientedPoint2D pose;
-};
 
 void generateBoWDescription(const OrientedPoint2D& pose, const std::vector<InterestPoint *>& pointsVector, std::multimap<double,WordResult>& signature) {
     for(unsigned int j = 0; j < pointsVector.size(); j++){

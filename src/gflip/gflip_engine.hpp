@@ -36,7 +36,9 @@
 #include <boost/math/special_functions/binomial.hpp>
 #include <sys/time.h>  
 #include <algorithm>
-
+#include "gflip_feature_extractor.hpp"
+#include "gflip_bow_generator.hpp"
+#include "gflip_types.hpp"
 
 //~ Basic and bag of distances  defaults   
 #define DEFAULT_BOWDST_START 0
@@ -158,6 +160,12 @@ class gflip_engine
 		 * @author Luciano Spinello
 		 */		 
  		void insert_wordscan(std::vector <int> wordscan, std::vector <double> xpos, std::vector <double> ypos);
+
+ 		/**
+		 * Inserts a scan described as a sequence of FLIRT words, represented each by a number
+		 * @param scan scan represented as a bag of words
+		 */
+ 		void insert_wordscan(scan_bow scan);
  		
 
 		/**
@@ -202,6 +210,14 @@ class gflip_engine
 		void prepare(void);
 
 		/**
+		 * Converts a raw scan into a scan represented by a bag of words.
+		 *
+		 * @param scan LaserScanInfo which contains all the necessary info required by flirtlib
+		 */
+		scan_bow generate_scan_bow(LaserScanInfo scan, std::vector<double> robot_pose,
+                                         std::vector<double> laser_pose);
+
+		/**
 		 * Constructor
 		 * 
 		 * @param krnl Kernel size
@@ -210,7 +226,8 @@ class gflip_engine
 		 * @param bstype flavor of TF-IDF in case of standard bag-of-words: 0 standard TFIDF, 1 sublinear TFIDF scaling, 2 lenght smoothing TFIDF, see \link gflip_engine::build_tfidf\endlink
 		 * @param a_vss alpha_smoothing in case of standard bag-of-words with lenght smoothing TFIDF (0.4 default)
 		 * @author Luciano Spinello
-		 */  
+		 */
+
 
 		gflip_engine (int krnl, int kbt, int bt=DEFAULT_BAGDISTANCE, int bstype=DEFAULT_BOWSUBTYPE, double a_vss=DEFAULT_ALPHASMOOTH)
 		{
@@ -226,6 +243,9 @@ class gflip_engine
 		    bow_dst_end=DEFAULT_BOWDST_END;
 
 		}
+
+
+
 		
 };
 

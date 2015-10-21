@@ -214,8 +214,8 @@ class gflip_engine
 		 *
 		 * @param scan LaserScanInfo which contains all the necessary info required by flirtlib
 		 */
-		scan_bow generate_scan_bow(LaserScanInfo scan, std::vector<double> robot_pose,
-                                         std::vector<double> laser_pose);
+		scan_bow generate_scan_bow(LaserScanInfo scan, std::vector<double> robot_pose, std::vector<double> laser_pose,
+                           std::string vocabulary_file);
 
 		/**
 		 * Constructor

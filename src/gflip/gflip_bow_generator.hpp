@@ -32,7 +32,7 @@ namespace bow_generator {
 
         void set_laser_pose(double x, double y, double theta);
         std::multimap<double, WordResult> get_signature();
-        void generate_bow(std::vector<InterestPoint *> m_pointsReference);
+        void generate_bow(std::vector<InterestPoint *> m_pointsReference, std::string vocabulary_file);
 
     private:
         HistogramVocabulary histogramVocabulary;

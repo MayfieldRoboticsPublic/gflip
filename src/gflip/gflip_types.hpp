@@ -5,6 +5,9 @@
 #ifndef GFLIP_GFLIP_TYPES_HPP
 #define GFLIP_GFLIP_TYPES_HPP
 
+#include <geometry/point.h>
+#include <vector>
+
 typedef struct LaserScanInfo {
     double max_range;
     std::vector<double> rem_values;

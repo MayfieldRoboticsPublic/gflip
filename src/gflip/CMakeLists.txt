@@ -15,7 +15,7 @@ SET(gflip_HDRS
 
 ADD_LIBRARY(gflip SHARED ${gflip_SRCS})
 INCLUDE_DIRECTORIES(${flirtlib_INCLUDE_DIRS})
-TARGET_LINK_LIBRARIES(gflip vocabulary ${flirtlib_LIBRARIES})
+TARGET_LINK_LIBRARIES(gflip vocabulary ${flirtlib_LIBRARIES} boost_filesystem boost_serialization)
 ADD_DEPENDENCIES(gflip flirt)
 
 install(TARGETS gflip

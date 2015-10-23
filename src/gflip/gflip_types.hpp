@@ -13,6 +13,8 @@ typedef struct LaserScanInfo {
     std::vector<double> rem_values;
     std::vector<double> angle;
     std::vector<double> distance;
+    OrientedPoint2D robot_pose;
+    OrientedPoint2D laser_pose;
 } LaserScanInfo;
 
 typedef struct WordResult {

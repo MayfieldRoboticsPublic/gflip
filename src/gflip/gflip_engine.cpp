@@ -608,8 +608,6 @@ scan_bow gflip_engine::generate_scan_bow(LaserScanInfo scan, std::vector<double>
 {
 	//Extract flirt features
 	feature_extractor::gflip_feature_extractor flirt_feature_extractor;
-	flirt_feature_extractor.set_laser_pose(laser_pose[0], laser_pose[1], laser_pose[2]);
-	flirt_feature_extractor.set_robot_pose(robot_pose[0], robot_pose[1], robot_pose[2]);
 	flirt_feature_extractor.set_scan(scan);
 	flirt_feature_extractor.extract_features(0,0,2);
 

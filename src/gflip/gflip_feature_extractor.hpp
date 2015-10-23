@@ -41,10 +41,6 @@ namespace feature_extractor {
     public:
         gflip_feature_extractor();
 
-        void set_robot_pose(double x, double y, double theta);
-
-        void set_laser_pose(double x, double y, double theta);
-
         void set_scan(LaserScanInfo scan);
 
         OrientedPoint2D get_laser_pose();

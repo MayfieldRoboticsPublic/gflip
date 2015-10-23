@@ -10,16 +10,6 @@ using namespace feature_extractor;
 gflip_feature_extractor::gflip_feature_extractor()
 {}
 
-void gflip_feature_extractor::set_robot_pose(double x, double y, double theta)
-{
-    robot_pose = OrientedPoint2D( x,  y,  theta);
-}
-
-void gflip_feature_extractor::set_laser_pose(double x, double y, double theta)
-{
-    laser_pose = OrientedPoint2D( x,  y,  theta);
-}
-
 void gflip_feature_extractor::set_scan(LaserScanInfo scan)
 {
   if(current_scan == NULL) {
@@ -29,8 +19,8 @@ void gflip_feature_extractor::set_scan(LaserScanInfo scan)
     current_scan->setRho(scan.distance);
     current_scan->setPhi(scan.angle);
   }
-  current_scan->setLaserPose(laser_pose);
-  current_scan->setRobotPose(robot_pose);
+  current_scan->setLaserPose(scan.laser_pose);
+  current_scan->setRobotPose(scan.robot_pose);
   current_scan->setMaxRange(scan.max_range);
   current_scan->setRemission(scan.rem_values);
 

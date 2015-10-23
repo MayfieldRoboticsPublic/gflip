@@ -1,12 +1,22 @@
 SET(gflip_SRCS 
   gflip_engine.cpp
+  gflip_bow_generator.cpp
+  gflip_feature_extractor.cpp
+
 ) 
 
-SET(gflip_HDRS 
+SET(gflip_HDRS
+  gflip_types.hpp
   gflip_engine.hpp
-) 
+  gflip_bow_generator.hpp
+  gflip_feature_extractor.hpp
+
+)
 
 ADD_LIBRARY(gflip SHARED ${gflip_SRCS})
+INCLUDE_DIRECTORIES(${flirtlib_INCLUDE_DIRS})
+TARGET_LINK_LIBRARIES(gflip vocabulary ${flirtlib_LIBRARIES} boost_filesystem boost_serialization)
+ADD_DEPENDENCIES(gflip flirt)
 
 install(TARGETS gflip
     RUNTIME DESTINATION bin

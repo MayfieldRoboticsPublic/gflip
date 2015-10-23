@@ -247,38 +247,38 @@ void writeBoW(std::ofstream& out){
     struct timeval start, end;
     gettimeofday(&start, NULL);
     for(unsigned int i = 0; i < m_pointsReference.size(); i++){
-	unsigned int currentProgress = (i*100)/(m_pointsReference.size() - 1);
-	if (progress < currentProgress){
-	    progress = currentProgress;
-	    bar[progress/2] = '#';
-	    std::cout << "\rDescribing scans  [" << bar << "] " << progress << "%" << std::flush;
-	}
-	std::multimap<double,WordResult> signature;
-	for(unsigned int j = 0; j < m_pointsReference[i].size(); j++){
-	    InterestPoint * point = m_pointsReference[i][j];
-	    OrientedPoint2D localpose = m_posesReference[i].ominus(point->getPosition());
-	    double angle = atan2(localpose.y, localpose.x);
-	    unsigned int bestWord = 0;
-	    double bestMatch = 0.;
-	    std::vector<double> descriptor;
-	    std::vector<double> weights;
-	    point->getDescriptor()->getWeightedFlatDescription(descriptor, weights);
-	    HistogramFeatureWord word(descriptor, NULL, weights);
-	    for(unsigned int w = 0; w < histogramVocabulary.size(); w++) {
-		double score = histogramVocabulary[w].sim(&word);
-		if(score > bestMatch) {
-		    bestMatch = score;
-		    bestWord = w;
-		}
-	    }
-	    WordResult best; best.pose = localpose; best.word = bestWord;
-	    signature.insert(std::make_pair(angle,best));
-	}
-	out << m_pointsReference[i].size();
-	for(std::multimap<double,WordResult>::const_iterator it = signature.begin(); it != signature.end(); it++){
-	  out << " " << it->second.word << " " << it->second.pose.x << " " << it->second.pose.y;
-	}
-	out <<std::endl;
+        unsigned int currentProgress = (i*100)/(m_pointsReference.size() - 1);
+        if (progress < currentProgress){
+            progress = currentProgress;
+            bar[progress/2] = '#';
+            std::cout << "\rDescribing scans  [" << bar << "] " << progress << "%" << std::flush;
+        }
+        std::multimap<double,WordResult> signature;
+        for(unsigned int j = 0; j < m_pointsReference[i].size(); j++){
+            InterestPoint * point = m_pointsReference[i][j];
+            OrientedPoint2D localpose = m_posesReference[i].ominus(point->getPosition());
+            double angle = atan2(localpose.y, localpose.x);
+            unsigned int bestWord = 0;
+            double bestMatch = 0.;
+            std::vector<double> descriptor;
+            std::vector<double> weights;
+            point->getDescriptor()->getWeightedFlatDescription(descriptor, weights);
+            HistogramFeatureWord word(descriptor, NULL, weights);
+            for(unsigned int w = 0; w < histogramVocabulary.size(); w++) {
+            double score = histogramVocabulary[w].sim(&word);
+            if(score > bestMatch) {
+                bestMatch = score;
+                bestWord = w;
+            }
+            }
+            WordResult best; best.pose = localpose; best.word = bestWord;
+            signature.insert(std::make_pair(angle,best));
+        }
+        out << m_pointsReference[i].size();
+        for(std::multimap<double,WordResult>::const_iterator it = signature.begin(); it != signature.end(); it++){
+          out << " " << it->second.word << " " << it->second.pose.x << " " << it->second.pose.y;
+        }
+        out <<std::endl;
     }
     gettimeofday(&end,NULL);
     timersub(&end,&start,&vocabularyTime);

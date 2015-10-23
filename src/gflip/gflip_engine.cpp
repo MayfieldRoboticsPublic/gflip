@@ -539,6 +539,18 @@ void gflip_engine::insert_wordscan(std::vector <int> scanbow, std::vector <doubl
 	number_of_scans = laserscan_bow.size();
 
 }
+
+
+// ---------------------------------------------------------
+
+
+void gflip_engine::insert_wordscan(scan_bow scan)
+{
+	laserscan_bow.push_back(scan);
+
+	number_of_scans = laserscan_bow.size();
+
+}
 // ---------------------------------------------------------
 
 int gflip_engine::read_wordscan_file(std::string filename)
@@ -587,6 +599,36 @@ int gflip_engine::read_wordscan_file(std::string filename)
 	number_of_scans = laserscan_bow.size();
 
 	return(count);
+}
+
+// ---------------------------------------------------------
+
+scan_bow gflip_engine::generate_scan_bow(LaserScanInfo scan, std::string vocabulary_file)
+{
+	//Extract flirt features
+	feature_extractor::gflip_feature_extractor flirt_feature_extractor;
+	flirt_feature_extractor.set_scan(scan);
+	flirt_feature_extractor.extract_features(0,0,2);
+
+	//Generate bag of words
+	bow_generator::gflip_bow_generator flirt_bow_generator;
+	flirt_bow_generator.generate_bow(flirt_feature_extractor.get_interest_points(),
+									 vocabulary_file);
+
+	std::multimap<double, WordResult> signature = flirt_bow_generator.get_signature();
+
+	scan_bow scan_bag_of_words(signature.size());
+
+	//Construct scan_bow
+	unsigned int w = 0;
+	for(std::multimap<double, WordResult>::const_iterator it = signature.begin(); it != signature.end(); ++it,++w)
+	{
+		scan_bag_of_words.w[w] = it->second.word;
+		scan_bag_of_words.w_x[w] = it->second.pose.x;
+		scan_bag_of_words.w_y[w] = it->second.pose.y;
+	}
+
+	return scan_bag_of_words;
 }
   
 // ---------------------------------------------------------

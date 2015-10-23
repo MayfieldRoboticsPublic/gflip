@@ -9,9 +9,9 @@ using namespace bow_generator;
 
 gflip_bow_generator::gflip_bow_generator() { }
 
-void gflip_bow_generator::set_laser_pose(double x, double y, double theta)
+void gflip_bow_generator::set_laser_pose(OrientedPoint2D pose)
 {
-    laser_pose = OrientedPoint2D( x,  y,  theta);
+    laser_pose = pose;
 }
 
 std::multimap<double, WordResult> gflip_bow_generator::get_signature()

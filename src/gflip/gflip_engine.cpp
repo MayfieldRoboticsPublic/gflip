@@ -603,8 +603,7 @@ int gflip_engine::read_wordscan_file(std::string filename)
 
 // ---------------------------------------------------------
 
-scan_bow gflip_engine::generate_scan_bow(LaserScanInfo scan, std::vector<double> robot_pose, std::vector<double> laser_pose,
-                           std::string vocabulary_file)
+scan_bow gflip_engine::generate_scan_bow(LaserScanInfo scan, std::string vocabulary_file)
 {
 	//Extract flirt features
 	feature_extractor::gflip_feature_extractor flirt_feature_extractor;
@@ -613,7 +612,6 @@ scan_bow gflip_engine::generate_scan_bow(LaserScanInfo scan, std::vector<double>
 
 	//Generate bag of words
 	bow_generator::gflip_bow_generator flirt_bow_generator;
-	flirt_bow_generator.set_laser_pose(laser_pose[0], laser_pose[1], laser_pose[2]);
 	flirt_bow_generator.generate_bow(flirt_feature_extractor.get_interest_points(),
 									 vocabulary_file);
 

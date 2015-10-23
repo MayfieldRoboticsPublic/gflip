@@ -43,15 +43,11 @@ namespace feature_extractor {
 
         void set_scan(LaserScanInfo scan);
 
-        OrientedPoint2D get_laser_pose();
-
         std::vector<InterestPoint *> get_interest_points();
 
         void extract_features(int detectorType, int descriptorType, int distanceType);
 
     private:
-        OrientedPoint2D robot_pose;
-        OrientedPoint2D laser_pose; //Pose referenced
 
         CurvatureDetector *m_detectorCurvature = NULL;
         NormalBlobDetector *m_detectorNormalBlob = NULL;

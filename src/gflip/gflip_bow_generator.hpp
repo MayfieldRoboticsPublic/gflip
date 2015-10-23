@@ -30,7 +30,7 @@ namespace bow_generator {
     public:
         gflip_bow_generator();
 
-        void set_laser_pose(double x, double y, double theta);
+        void set_laser_pose(OrientedPoint2D pose);
         std::multimap<double, WordResult> get_signature();
         void generate_bow(std::vector<InterestPoint *> m_pointsReference, std::string vocabulary_file);
 

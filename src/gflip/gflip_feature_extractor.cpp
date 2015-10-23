@@ -26,11 +26,6 @@ void gflip_feature_extractor::set_scan(LaserScanInfo scan)
 
 }
 
-OrientedPoint2D gflip_feature_extractor::get_laser_pose()
-{
-    return laser_pose;
-}
-
 std::vector<InterestPoint *> gflip_feature_extractor::get_interest_points()
 {
     return  m_pointReference;

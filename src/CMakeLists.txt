@@ -31,7 +31,7 @@ FIND_PACKAGE(flirtlib REQUIRED)
 
 # Library: Boost
 set(Boost_USE_MULTITHREADED ON)
-FIND_PACKAGE(Boost 1.36.0 COMPONENTS program_options serialization)
+FIND_PACKAGE(Boost 1.55.0 COMPONENTS program_options serialization)
 #FIND_PACKAGE(Boost COMPONENTS program_options math graph)
 IF(Boost_FOUND)
 	MESSAGE(STATUS "Boost found")

@@ -151,7 +151,7 @@ void gflip_engine::matching_gfp(std::vector <int> &query_v)
 	for(uint j=0;j<query_v.size();j++)
 	{
 		int word_id = query_v[j];
-                if(word_id > tf_idf.size()){
+                if(word_id < tf_idf.size()){
 			for(uint a=0;a<tf_idf[word_id].doc_id.size();a++)
 			{
 				int doc_idx = tf_idf[word_id].doc_id[a];

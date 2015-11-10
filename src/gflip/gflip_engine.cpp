@@ -151,26 +151,28 @@ void gflip_engine::matching_gfp(std::vector <int> &query_v)
 	for(uint j=0;j<query_v.size();j++)
 	{
 		int word_id = query_v[j];
-		for(uint a=0;a<tf_idf[word_id].doc_id.size();a++)
-		{
-			int doc_idx = tf_idf[word_id].doc_id[a];
-			mtchgfp_used_doc_idx[doc_idx] = 1;
-
-			//~ match positions
-			for(uint h=0;h<tf_idf[word_id].word_order[a].pos.size();h++)
+                if(word_id > tf_idf.size()){
+			for(uint a=0;a<tf_idf[word_id].doc_id.size();a++)
 			{
-				int w_order_dif=j-tf_idf[word_id].word_order[a].pos[h];
-				int rcidx = (max_bow_len * doc_idx) + (middleidx+w_order_dif);
-							
-				mtchgfp_rc_weak_match[rcidx]++;
-				mtchgfp_rc_idf_sum[rcidx] += tf_idf [word_id].idf;
-				
-				if(middleidx+w_order_dif < mtchgfp_min_det_idx[doc_idx])
-					mtchgfp_min_det_idx[doc_idx] = middleidx+w_order_dif;
-				if(middleidx+w_order_dif > mtchgfp_max_det_idx[doc_idx])
-					mtchgfp_max_det_idx[doc_idx] = middleidx+w_order_dif;								
+				int doc_idx = tf_idf[word_id].doc_id[a];
+				mtchgfp_used_doc_idx[doc_idx] = 1;
+
+				//~ match positions
+				for(uint h=0;h<tf_idf[word_id].word_order[a].pos.size();h++)
+				{
+					int w_order_dif=j-tf_idf[word_id].word_order[a].pos[h];
+					int rcidx = (max_bow_len * doc_idx) + (middleidx+w_order_dif);
+								
+					mtchgfp_rc_weak_match[rcidx]++;
+					mtchgfp_rc_idf_sum[rcidx] += tf_idf [word_id].idf;
+					
+					if(middleidx+w_order_dif < mtchgfp_min_det_idx[doc_idx])
+						mtchgfp_min_det_idx[doc_idx] = middleidx+w_order_dif;
+					if(middleidx+w_order_dif > mtchgfp_max_det_idx[doc_idx])
+						mtchgfp_max_det_idx[doc_idx] = middleidx+w_order_dif;								
+				}
 			}
-		}
+                }
 	}
 
 	int num_used_doc_idx = 0;

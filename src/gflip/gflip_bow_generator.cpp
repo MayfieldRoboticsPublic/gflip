@@ -21,7 +21,7 @@ std::multimap<double, WordResult> gflip_bow_generator::get_signature()
 
 void gflip_bow_generator::generate_bow(std::vector<InterestPoint *> m_pointsReference, std::string vocabulary_file) {
 
-    std::string vocabulary("Vocabulary.voc"); //TODO make this an arguement so we can pass our own vocab
+    std::string vocabulary(vocabulary_file); 
     std::ifstream vocabularyStream(vocabulary.c_str());
     boost::archive::binary_iarchive vocabularyArchive(vocabularyStream);
     vocabularyArchive >> histogramVocabulary;

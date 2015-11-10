@@ -35,7 +35,7 @@ void gflip_feature_extractor::extract_features(int detectorType, int descriptorT
 
     unsigned int scale = 5, dmst = 2, window = 3;
     double baseSigma = 0.2, sigmaStep = 1.4, minPeak = 0.34, minPeakDistance = 0.001;
-    bool useMaxRange = true, gspan = false;
+    bool useMaxRange = false, gspan = false;
     SimpleMinMaxPeakFinder *m_peakMinMax = new SimpleMinMaxPeakFinder(minPeak, minPeakDistance);
 
     BetaGridGenerator *m_betaGenerator = NULL;
